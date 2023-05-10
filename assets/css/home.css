@@ -195,6 +195,10 @@
     overflow: auto;
 }
 
+.show-payroll{
+    flex-direction: column;
+}
+
 .show-payroll-table, .show-table, th, tr, td{
     border: 1px solid #ddd;
     border-spacing: 0;
