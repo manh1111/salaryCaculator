@@ -44,14 +44,14 @@ items.forEach((item, index) => {
 
 //change page
 function goToHome() {
-    window.location = "/thanglong-website/home.html";
+    window.location = "/home.html";
 }
 function goToConfirm() {
-    window.location = "/thanglong-website/confirm.html";
+    window.location = "/confirm.html";
 }
 
 function goToIndex() {
-    window.location = "/thanglong-website/index.html";
+    window.location = "/index.html";
 }
 
 const changePassBtn = $('.change-passWord-btn')

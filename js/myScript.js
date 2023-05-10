@@ -8,14 +8,14 @@ if (closeBtn) {
     })
 }
 function goToHome() {
-    window.location = "/thanglong-website/home.html";
+    window.location = "/home.html";
 }
 function goToConfirm() {
-    window.location = "/thanglong-website/confirm.html";
+    window.location = "/confirm.html";
 }
 
 function goToIndex() {
-    window.location = "/thanglong-website/index.html";
+    window.location = "/index.html";
 }
 const navBtns = document.querySelectorAll('.nav-btn')
 const login = document.querySelector('.login-href-btn')
