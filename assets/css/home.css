@@ -1,0 +1,292 @@
+#header{
+    background-color: white;
+    box-shadow: 0 1px 10px 0 rgb(0 0 0 / 20%);
+    z-index: 10;
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+.header__nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    width: inherit;
+    margin: auto;
+}
+
+.nav-content > ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-content > ul > li{
+    position: relative;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 8px;
+    width: 150px;
+    text-align: center;
+}
+
+.nav-page{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hide {
+    display: none;
+}
+
+.header__nav li:hover {
+    color: #000;
+    cursor: pointer;
+    background-color: #f4e7e7;
+    border-radius: 10px;
+}
+
+.header__nav li:hover > .sub-nav {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 150px;
+    box-shadow: 0 6px 10px 0 rgb(0 0 0 / 20%),
+    0 4px 20px 0 rgb(0 0 0 / 19%);
+    display: block;
+    background-color: #f4e7e7;
+    border-radius: 10px;
+}
+
+.sub-nav li {
+    padding: 0 8px;
+    text-align: left;
+    height: 38.5px;
+    line-height: 38.5px;
+    font-size: 13px;
+    font-weight: 400;
+    display: block;
+    color: black;
+}
+
+.header__nav li:hover .sub-nav li:hover,
+.sider .sider-item:hover ul li:hover {
+    font-weight: 600;
+}
+
+.nav-btn,
+.payroll-btn button,
+.class-btn button,
+.handle-info-btn button{
+    border: none;
+    color: rgb(98, 62, 62);
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 8px;
+    background-color: #eecfcf;
+}
+
+.nav-btn:hover{
+    background: #a73838;
+    color: #fff;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%),
+        0 4px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.logo-header{
+    object-fit: contain;
+}
+
+#content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.show-info-class,
+.create-teach
+.show-info{
+    display: none;
+    width: 1200px;
+    justify-content: center;
+    gap: 150px;
+    margin: auto;
+}
+
+.show-info-class{
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-teach p{
+    margin: 10px;
+    padding: 5px;
+    font-size: 18px;
+}
+
+.class-btn{
+    display: flex;
+    width: 500px;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.class-btn button{
+    width: 100px;
+}
+
+.show-content,
+.show-modal,
+.show-sider{
+    display: flex !important
+}
+
+.block-input,
+.input-payroll,
+.block-input-class{
+    margin: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.block-input label,
+.block-input-class label{
+    display: inline-block;
+    width: 100px;
+}
+
+.block-input-class input,
+.block-input input,
+.block-input select,
+.input-payroll input{
+    margin-top: 10px;
+    padding: 10px;
+    width: calc(100% - 105px);
+    border: none;
+    outline: none;
+}
+
+.sider{
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%);
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    top: 65px;
+    border-radius: 10px;
+}
+
+.sider .sider-item:hover ul{
+    position: relative;
+    z-index: 999;
+    display: block;
+    left: 200px;
+    float: left;
+    background-color: #f4e7e7;
+    border-radius: 10px;
+    width: 100px;
+    overflow: auto;
+}
+
+.show-payroll-table, .show-table, th, tr, td{
+    border: 1px solid #ddd;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.show-payroll-table th{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.payroll-modal{
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.3);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.payroll-modal .payroll-container{
+    position: relative;
+    width: 500px;
+    height: 250px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    animation: displayModal ease 0.4s;
+}
+
+.modal-body i{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f4e7e7;
+    border-radius: 10px;
+}
+
+.sider-item{
+    height: 50px;
+    background-color: #f4e7e7;
+    text-align: center;
+    border-radius: 10px;
+    line-height: 50px;
+    font-size: 17px;
+}
+
+.payroll-btn,
+.handle-info-btn{
+    display: flex;
+    justify-content: space-evenly
+}
+#footer{
+    text-align: center;
+    background-color: #eadcdc;
+    color:#000;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0px;
+}
+
+.footer__container span{
+    font-size: 13px;
+    font-weight: 600;
+}
+
+@keyframes displayModal {
+    from {
+        opacity: 0;
+        transform: translateY(-200px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
