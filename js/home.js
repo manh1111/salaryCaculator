@@ -1,8 +1,10 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
+let infoTeacher = undefined;
+const listInput = ['teacherCode', 'name', 'dob', 'email', 'phoneNumber', 'address']
 
 // payrollModal
-const closeBtn = $('.js-close-btn')
+const closeBtn = $('.js-close-payroll-btn')
 const modal = $('.payroll-modal')
 const staSalary = $('.js-sta-salary')
 const modalContainer = $('.payroll-container')
@@ -21,9 +23,33 @@ modalContainer.addEventListener('click', (event) => {
 )
 
 
+//createClassModal
+const createBtn = $(".create-btn")
+const createClassModal = $(".modal-create-class")
+const closeCreate = $(".js-close-create-class")
+createBtn.addEventListener('click', () => {
+    createClassModal.classList.add('show-modal')
+})
+closeCreate.addEventListener('click', () => {
+    createClassModal.classList.remove('show-modal')
+})
+
+
+//addTeachModal
+const addBtn = $(".add-teach-btn")
+const addTeachModal = $(".modal-add-teach")
+const closeAdd = $(".close-add-teach")
+addBtn.addEventListener('click', () => {
+    addTeachModal.classList.add('show-modal')
+})
+closeAdd.addEventListener('click', () => {
+    addTeachModal.classList.remove('show-modal')
+})
+
 // showContent
 const items = $$('.js-item')
 const contentItems = $$('.js-show-item')
+const i = $('.i-item')
 
 
 items.forEach((item, index) => {
@@ -34,9 +60,13 @@ items.forEach((item, index) => {
             }
         })
         showItem = contentItems[index]
-
         $('.js-sider').classList.add('show-content')
         showItem.classList.add('show-content')
+
+        if (index != 0){
+            i.classList.add('hide')}
+        else{
+            i.classList.remove('hide')}
     })
 
 });
@@ -59,3 +89,49 @@ const exitBtn = $('.exit-btn')
 
 exitBtn.addEventListener('click', goToIndex)
 changePassBtn.addEventListener('click', goToConfirm)
+
+const showTeacher = () => {
+    listInput.forEach((item) => {
+        var input = document.querySelector(`input[name="${item}"]`);
+        if (input) {
+            if (item === 'dob') {
+                input.value = infoTeacher[`${item}`].slice(0, 10);
+            }
+            else{
+                input.value = infoTeacher[`${item}`]
+            }
+        }
+    })
+    let select = $('select[name="degree"]')
+    select.value =  infoTeacher.degree
+}
+//api lấy thông tin giáo viên 
+fetch('https://103.69.193.30.nip.io/teachers/get')
+    .then((response) => {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    // Read the response as json.
+    return response.json();
+    })
+    .then((response) => {
+        if (response.success) {
+            const listTeacher = $('#list-teacher')
+            for (let i = 0; i < response.data.length; i++){
+                let teacher = response.data[i];
+                let li = document.createElement("li");
+                li.textContent = teacher.teacherCode;
+
+                // Thêm lớp "highlight" vào thẻ li
+                li.classList.add("sider-item");
+                li.onclick = () => {
+                    infoTeacher = teacher
+                    showTeacher()
+                }  
+                listTeacher.appendChild(li);
+            }
+        }
+    })
+    .catch(e => {
+    console.log(e)
+    })

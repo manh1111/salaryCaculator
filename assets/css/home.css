@@ -47,35 +47,6 @@
     background-color: #f4e7e7;
     border-radius: 10px;
 }
-
-.header__nav li:hover > .sub-nav {
-    position: absolute;
-    left: 0;
-    top: 100%;
-    width: 150px;
-    box-shadow: 0 6px 10px 0 rgb(0 0 0 / 20%),
-    0 4px 20px 0 rgb(0 0 0 / 19%);
-    display: block;
-    background-color: #f4e7e7;
-    border-radius: 10px;
-}
-
-.sub-nav li {
-    padding: 0 8px;
-    text-align: left;
-    height: 38.5px;
-    line-height: 38.5px;
-    font-size: 13px;
-    font-weight: 400;
-    display: block;
-    color: black;
-}
-
-.header__nav li:hover .sub-nav li:hover,
-.sider .sider-item:hover ul li:hover {
-    font-weight: 600;
-}
-
 .nav-btn,
 .payroll-btn button,
 .class-btn button,
@@ -171,7 +142,7 @@
 }
 
 .sider{
-    width: 200px;
+    width: 220px;
     height: 100%;
     position: fixed;
     left: 0;
@@ -183,20 +154,18 @@
     border-radius: 10px;
 }
 
-.sider .sider-item:hover ul{
-    position: relative;
-    z-index: 999;
-    display: block;
-    left: 200px;
-    float: left;
-    background-color: #f4e7e7;
+.sider i{
+    padding: 5px;
     border-radius: 10px;
-    width: 100px;
-    overflow: auto;
+}
+
+.sider i:hover{
+    background-color: #eecfcf;
 }
 
 .show-payroll{
     flex-direction: column;
+    
 }
 
 .show-payroll-table, .show-table, th, tr, td{
@@ -211,7 +180,9 @@
     font-weight: 600;
 }
 
-.payroll-modal{
+.payroll-modal,
+.modal-add-teach,
+.modal-create-class{
     position: fixed;
     display: none;
     width: 100%;
@@ -226,10 +197,21 @@
     align-items: center;
 }
 
+.add-teach-container,
+.create-class-container{
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    background-color: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    animation: displayModal ease 0.4s;
+}
+
 .payroll-modal .payroll-container{
     position: relative;
-    width: 500px;
-    height: 250px;
     background-color: #ffffff;
     border-radius: 10px;
     display: flex;
@@ -250,11 +232,15 @@
 
 .sider-item{
     height: 50px;
-    background-color: #f4e7e7;
     text-align: center;
+    border-bottom: 1px solid #ccc;
     border-radius: 10px;
     line-height: 50px;
     font-size: 17px;
+}
+
+.sider-item:hover{
+    background-color: #f4e7e7;
 }
 
 .payroll-btn,
