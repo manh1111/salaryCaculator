@@ -61,7 +61,8 @@
     background-color: #eecfcf;
 }
 
-.nav-btn:hover{
+.nav-btn:hover,
+.handle-info-btn button:hover{
     background: #a73838;
     color: #fff;
     box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%),
@@ -98,8 +99,8 @@
 }
 
 .info-teach p{
-    margin: 8px;
-    padding: 4px;
+    margin: 10px;
+    padding: 5px;
     font-size: 18px;
 }
 
@@ -184,7 +185,7 @@
 }
 
 .payroll-modal,
-.modal-add-teach,
+.modal-add-teacher,
 .modal-create-class{
     position: fixed;
     display: none;
@@ -200,7 +201,7 @@
     align-items: center;
 }
 
-.add-teach-container,
+.add-teacher-container,
 .create-class-container{
     position: relative;
     width: fit-content;

@@ -35,22 +35,21 @@ closeCreate.addEventListener('click', () => {
 })
 
 
-//addTeachModal
-const addBtn = $(".add-teach-btn")
-const addTeachModal = $(".modal-add-teach")
-const closeAdd = $(".close-add-teach")
-addBtn.addEventListener('click', () => {
-    addTeachModal.classList.add('show-modal')
+//addTeacherModal
+const showModalAdd = $(".add-teacher-btn")
+const addTeacherModal = $(".modal-add-teacher")
+const closeAdd = $(".close-add-teacher")
+showModalAdd.addEventListener('click', () => {
+    addTeacherModal.classList.add('show-modal')
 })
 closeAdd.addEventListener('click', () => {
-    addTeachModal.classList.remove('show-modal')
+    addTeacherModal.classList.remove('show-modal')
 })
 
 // showContent
 const items = $$('.js-item')
 const contentItems = $$('.js-show-item')
 const i = $('.i-item')
-
 
 items.forEach((item, index) => {
     item.addEventListener('click', () => {
@@ -96,7 +95,7 @@ changePassBtn.addEventListener('click', goToConfirm)
 
 const showTeacher = () => {
     listInput.forEach((item) => {
-        var input = document.querySelector(`input[name="${item}"]`);
+        var input = $((`input[name="${item}"]`));
         if (input) {
             if (item === 'dob') {
                 input.value = infoTeacher[`${item}`].slice(0, 10);
@@ -110,7 +109,7 @@ const showTeacher = () => {
     select.value =  infoTeacher.degree
 }
 
-function getTeacher() {
+function getTeacher(callback) {
     const apiGetTeacher = 'https://103.69.193.30.nip.io/teachers/get'
     //api lấy thông tin giáo viên 
     fetch(apiGetTeacher)
@@ -133,7 +132,7 @@ function getTeacher() {
                     li.classList.add("sider-item");
                     li.onclick = () => {
                         infoTeacher = teacher
-                        showTeacher()
+                        callback();
                     }  
                     listTeacher.appendChild(li);
                 }
@@ -144,10 +143,52 @@ function getTeacher() {
         })
 }
 
+function createTeacher(data, callback) {
+    apiPostTeacher = 'https://103.69.193.30.nip.io/teachers/create'
+    fetch(apiPostTeacher, {
+        method: "POST",
+    //     mode: "cors", // no-cors, *cors, same-origin
+    //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    //     credentials: "include", // include, *same-origin, omit
+        headers: { 'Content-Type': 'application/json' },
+    //     redirect: "follow", // manual, *follow, error
+    //     referrerPolicy: "no-referrer",
+        body: JSON.stringify(data)
+    })
+    .then(function (response) {
+        return response.json();  
+    })
+    .catch(e => {
+        console.log(e)
+    })
+}
 
+function showNewTeacher(response) {
+    console.log(response)
+}
+
+function handleAddTeacher(){
+    const addTeacherBtn = $('.add-teacher')
+    addTeacherBtn.onclick = () => {
+        let info = []
+        var data = {}
+        for(let item of listInput){
+            if (item != 'teacherCode') {
+                info[item] = $((`.modal-add-teacher input[name="${item}"]`)).value 
+                let degreeTeacher = $((`.modal-add-teacher select[name="degree"]`)).value 
+                data[`${item}`]= info[item]
+                data.degree = degreeTeacher
+            }
+        }
+        createTeacher(data)
+        addTeacherModal.classList.remove('show-modal')
+        showNewTeacher();
+    }
+}
 
 function run() {
     getTeacher(showTeacher);
+    handleAddTeacher();
 }
 
 run();

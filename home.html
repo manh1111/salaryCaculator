@@ -37,7 +37,7 @@
                 <div class="input-id">
                     <input type="text" name="search-id" style="border-radius: 10px; margin: 15px 3px 15px 15px; border: 1px solid #ccc; padding: 3px; width: 140px;">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <i class="fa-solid fa-plus add-teach-btn i-item hide"></i>
+                    <i class="fa-solid fa-plus add-teacher-btn i-item hide"></i>
                 </div>
                 <ul id="list-teacher">
 
@@ -166,31 +166,27 @@
                 </div>
             </div>
         
-        <div class="modal-add-teach">
-            <div class="add-teach-container">
+        <div class="modal-add-teacher">
+            <div class="add-teacher-container">
                 <div class="add-left">
-                    <div class="block-input">
-                        <Label>Mã giáo viên: </Label>
-                        <input type="text" name="code-teach">
-                    </div>
                     <div class="block-input">
                         <Label>Họ và tên: </Label>
                         <input type="text" name="name" value="">
                     </div>
                     <div class="block-input">
                         <Label>Ngày sinh: </Label>
-                        <input type="date" name="birthday">
+                        <input type="date" name="dob">
                     </div>
                     <div class="block-input">
                         <Label>Email: </Label>
                         <input type="email" name="email">
                     </div>
-                </div>
-                <div class="add-right">
                     <div class="block-input">
                         <Label>Số điện thoại: </Label>
                         <input type="text" name="phoneNumber">
                     </div>
+                </div>
+                <div class="add-right">
                     <div class="block-input">
                         <Label>Bằng cấp: </Label>
                         <select name="degree">
@@ -206,9 +202,9 @@
                         <Label>Địa chỉ: </Label>
                         <input type="text" name="address">
                     </div>
-                    <div class="handle-info-btn" style="margin-top: 50px;">
-                        <button class="add-teach">Tạo mới</button>
-                        <button class="close-add-teach">
+                    <div class="handle-info-btn" style="margin-top: 115px;">
+                        <button class="add-teacher">Tạo mới</button>
+                        <button class="close-add-teacher">
                             Đóng
                             <i class="fa-solid fa-xmark"></i>
                         </button>
@@ -233,11 +229,19 @@
                         <Label>Lớp: </Label>
                         <input type="text" name="class" value="">
                     </div>
-                </div>
-                <div class="class-right">
                     <div class="block-input">
                         <Label>Môn: </Label>
                         <input type="text" name="name-subject" value="">
+                    </div>
+                </div>
+                <div class="class-right">
+                    <div class="block-input">
+                        <Label>Hệ số môn: </Label>
+                        <input type="text" name="sub-coefficients" value="">
+                    </div>
+                    <div class="block-input">
+                        <Label>Số tiết: </Label>
+                        <input type="text" name="num-lesson" value="">
                     </div>
                     <div class="block-input">
                         <Label>Số sinh viên: </Label>
