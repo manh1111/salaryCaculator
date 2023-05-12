@@ -38,7 +38,7 @@
 }
 
 .hide {
-    display: none;
+    display: none !important
 }
 
 .header__nav li:hover {
@@ -80,7 +80,8 @@
 }
 
 .show-info-class,
-.create-teach
+.show-payroll,
+.create-teach,
 .show-info{
     display: none;
     width: 1200px;
@@ -89,14 +90,16 @@
     margin: auto;
 }
 
-.show-info-class{
+.show-info-class,
+.show-payroll,
+.show-payroll{
     flex-direction: column;
     align-items: center;
 }
 
 .info-teach p{
-    margin: 10px;
-    padding: 5px;
+    margin: 8px;
+    padding: 4px;
     font-size: 18px;
 }
 

@@ -94,36 +94,43 @@
 
             
             <div class="show-payroll js-show-item hide">
-                <div class="info-teach">
-                    <p class="code-teach">Mã giảng viên: </p>
-                    <p class="name">Họ và tên: </p>
-                    <p class="degree">Bằng cấp: </p>
+                <div class="show">
+                    <div class="info-teach">
+                        <p class="code-teach">Mã giảng viên: </p>
+                        <p class="name">Họ và tên: </p>
+                        <p class="degree">Bằng cấp: </p>
+                        <table class="show-payroll-table" style="width: 800px; border-radius: 10px;">
+                            <thead style="display: table-header-group; background-color: #eadcdc;">
+                                <th>STT</th>
+                                <th>Lớp</th>
+                                <th>Môn học</th>
+                                <th>Số tiết</th>
+                                <th>Số sinh viên</th>
+                                <th>Số tiền</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td class="class">A707</td>
+                                    <td class="name-subject">Giải tích 1</td>
+                                    <td class="num-lesson">1</td>
+                                    <td class="num-student">1</td>
+                                    <td class="salary-per-sub">00000</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="5">Tổng tiền lương</td>
+                                    <td class="total-salary">00000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <table class="show-payroll-table" style="width: 800px; border-radius: 10px;">
-                    <thead style="display: table-header-group; background-color: #eadcdc;">
-                        <th>STT</th>
-                        <th>Lớp</th>
-                        <th>Môn học</th>
-                        <th>Số tiết</th>
-                        <th>Số sinh viên</th>
-                        <th>Số tiền</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td class="class">A707</td>
-                            <td class="name-subject">Giải tích 1</td>
-                            <td class="num-lesson">1</td>
-                            <td class="num-student">1</td>
-                            <td class="salary-per-sub">00000</td>
-                        </tr>
-                        
-                        <tr>
-                            <td colspan="5">Tổng tiền lương</td>
-                            <td class="total-salary">00000</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="class-btn">
+                    <button>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
 
             <div class="show-info-class js-show-item">

@@ -62,11 +62,15 @@ items.forEach((item, index) => {
         showItem = contentItems[index]
         $('.js-sider').classList.add('show-content')
         showItem.classList.add('show-content')
-
-        if (index != 0){
-            i.classList.add('hide')}
-        else{
-            i.classList.remove('hide')}
+        $('.input-id').addEventListener('click', (event) => {
+            event.stopPropagation();
+        })
+        if (index == 0){
+            i.classList.remove('hide')
+        }
+        else {
+            i.classList.add('hide')
+        }
     })
 
 });
@@ -105,33 +109,45 @@ const showTeacher = () => {
     let select = $('select[name="degree"]')
     select.value =  infoTeacher.degree
 }
-//api lấy thông tin giáo viên 
-fetch('https://103.69.193.30.nip.io/teachers/get')
-    .then((response) => {
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    // Read the response as json.
-    return response.json();
-    })
-    .then((response) => {
-        if (response.success) {
-            const listTeacher = $('#list-teacher')
-            for (let i = 0; i < response.data.length; i++){
-                let teacher = response.data[i];
-                let li = document.createElement("li");
-                li.textContent = teacher.teacherCode;
 
-                // Thêm lớp "highlight" vào thẻ li
-                li.classList.add("sider-item");
-                li.onclick = () => {
-                    infoTeacher = teacher
-                    showTeacher()
-                }  
-                listTeacher.appendChild(li);
-            }
+function getTeacher() {
+    const apiGetTeacher = 'https://103.69.193.30.nip.io/teachers/get'
+    //api lấy thông tin giáo viên 
+    fetch(apiGetTeacher)
+        .then((response) => {
+        if (!response.ok) {
+            throw Error(response.statusText);
         }
-    })
-    .catch(e => {
-    console.log(e)
-    })
+        // Read the response as json.
+        return response.json();
+        })
+        .then((response) => {
+            if (response.success) {
+                const listTeacher = $('#list-teacher')
+                for (let i = 0; i < response.data.length; i++){
+                    let teacher = response.data[i];
+                    let li = document.createElement("li");
+                    li.textContent = teacher.teacherCode;
+
+                    // Thêm lớp "highlight" vào thẻ li
+                    li.classList.add("sider-item");
+                    li.onclick = () => {
+                        infoTeacher = teacher
+                        showTeacher()
+                    }  
+                    listTeacher.appendChild(li);
+                }
+            }
+        })
+        .catch(e => {
+        console.log(e)
+        })
+}
+
+
+
+function run() {
+    getTeacher(showTeacher);
+}
+
+run();
