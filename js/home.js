@@ -95,7 +95,7 @@ changePassBtn.addEventListener('click', goToConfirm)
 
 const showTeacher = () => {
     listInput.forEach((item) => {
-        var input = $((`input[name="${item}"]`));
+        let input = $((`.show-info input[name="${item}"]`));
         if (input) {
             if (item === 'dob') {
                 input.value = infoTeacher[`${item}`].slice(0, 10);
@@ -109,8 +109,9 @@ const showTeacher = () => {
     select.value =  infoTeacher.degree
 }
 
+const apiGetTeacher = 'https://103.69.193.30.nip.io/teachers/get'
+const listTeacher = $('#list-teacher')
 function getTeacher(callback) {
-    const apiGetTeacher = 'https://103.69.193.30.nip.io/teachers/get'
     //api lấy thông tin giáo viên 
     fetch(apiGetTeacher)
         .then((response) => {
@@ -122,7 +123,6 @@ function getTeacher(callback) {
         })
         .then((response) => {
             if (response.success) {
-                const listTeacher = $('#list-teacher')
                 for (let i = 0; i < response.data.length; i++){
                     let teacher = response.data[i];
                     let li = document.createElement("li");
@@ -143,8 +143,8 @@ function getTeacher(callback) {
         })
 }
 
-function createTeacher(data, callback) {
-    apiPostTeacher = 'https://103.69.193.30.nip.io/teachers/create'
+const apiPostTeacher = 'https://103.69.193.30.nip.io/teachers/create'
+function createTeacher(data) {
     fetch(apiPostTeacher, {
         method: "POST",
     //     mode: "cors", // no-cors, *cors, same-origin
@@ -155,16 +155,31 @@ function createTeacher(data, callback) {
     //     referrerPolicy: "no-referrer",
         body: JSON.stringify(data)
     })
-    .then(function (response) {
-        return response.json();  
-    })
-    .catch(e => {
-        console.log(e)
-    })
-}
-
-function showNewTeacher(response) {
-    console.log(response)
+        .then(function (response) {
+            return response.json();  
+        })
+        .then((response) => {
+            //show new teacher
+            listInput.forEach((item) => {
+                let input = $((`.show-info input[name="${item}"]`));
+                if (input) {
+                    if (item === 'dob') {
+                        input.value = response.data[`${item}`].slice(0, 10);
+                    }
+                    else{
+                        input.value = response.data[`${item}`]
+                    }
+                }
+            })
+            let select = $('.show-info elect[name="degree"]')
+            select.value = response.data.degree
+            
+            li.textContent = response.data.teacherCode;
+            li.classList.add("sider-item");
+        })
+        .catch(e => {
+            console.log(e)
+        })
 }
 
 function handleAddTeacher(){
@@ -180,15 +195,15 @@ function handleAddTeacher(){
                 data.degree = degreeTeacher
             }
         }
+        data['cmnd'] = '26663'
         createTeacher(data)
         addTeacherModal.classList.remove('show-modal')
-        showNewTeacher();
     }
 }
 
 function run() {
     getTeacher(showTeacher);
-    handleAddTeacher();
+    handleAddTeacher()
 }
 
 run();

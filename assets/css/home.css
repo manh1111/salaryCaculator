@@ -179,11 +179,6 @@
     text-align: center;
 }
 
-.show-payroll-table th{
-    font-size: 14px;
-    font-weight: 600;
-}
-
 .payroll-modal,
 .modal-add-teacher,
 .modal-create-class{
