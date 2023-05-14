@@ -235,6 +235,25 @@ function handleAddTeacher() {
     }
 }
 
+const apiDeleteClass = 'https://103.69.193.30.nip.io/classes/delete'
+function handleDeleteClass(id) {
+    fetch(apiDeleteClass +"?id=" + id, {
+        method: "Delete",
+        //     mode: "cors", // no-cors, *cors, same-origin
+        //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        //     credentials: "include", // include, *same-origin, omit
+        headers: { 'Content-Type': 'application/json' },
+        //     redirect: "follow", // manual, *follow, error
+        //     referrerPolicy: "no-referrer",
+    })
+    .then(
+        getClass()
+    )
+    .catch(e => {
+        console.log(e)
+    })
+}
+
 let listIDClass = []
 let listNameClass = []
 const listClass = $('#list-class')
@@ -255,23 +274,16 @@ function getClass() {
                 for (let i = 0; i < response.data.length; i++) {
                     let tr = document.createElement("tr");
                     let classObject = response.data[i];
-                    let nameSub = ''
-                    if (classObject.hasOwnProperty(Subject)) {
-                        // nameSub = classObject.Subject.name
-                        console.log('123')
-                    } else {
-                        nameSub = "Đã xóa"
-                        console.log('321')
-                    }
-                    let data = [i + 1, classObject.name, nameSub, classObject.Teacher.name,
+                    let data = [i + 1, classObject.name, classObject?.Subject?.name || "Đã xóa", classObject.Teacher.name,
                         classObject.studentNumber]
-                        for (let j = 0; j < 7; j++) {
+                        for (let j = 0; j < data.length + 2; j++) {
                         let td = document.createElement("td");
                         td.textContent = data[j]
                         if (j === 5) {
                             let iElement = document.createElement('i')
                             iElement.classList.add('fa-solid')
                             iElement.classList.add('fa-xmark')
+                            iElement.onclick = ()=>{handleDeleteClass(listIDClass[i])}
                             td.appendChild(iElement)
                             }
                             if (j === 6) {
@@ -456,9 +468,54 @@ function createSubject(data) {
         body: JSON.stringify(data)
     })
         .then(function (response) {
-            return response.json();
+            response.json();
         })
         .then(getSubject())
+        .catch(e => {
+            console.log(e)
+        })
+}
+
+const listSalary = $('.list-class')
+const apiGetSalary = 'https://103.69.193.30.nip.io/salary/get'
+function getSalary() {
+    fetch(apiGetSalary)
+        .then((response) => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return response.json();
+        })
+        .then((response) => {
+            if (response.success) {
+                console.log(response)
+                while (listSalary.firstChild) {
+                    listSalary.removeChild(listSalary.firstChild)
+                }
+                
+            }
+        })
+        .catch(e => {
+            console.log(e)
+        })
+}
+
+const apiGetStandarSalary = 'https://103.69.193.30.nip.io/salary/getStandardSalary'
+function getStandarSalary() {
+    fetch(apiGetStandarSalary)
+        .then((response) => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return response.json();
+        })
+        .then((response) => {
+            if (response.success) {
+                $((`.modal-body input[name="input-payroll"]`)).value = response.data.standardSalary;
+                $((`.modal-body input[name="create-payroll"]`)).value = response.data.createdAt.slice(0, 10);;
+                $((`.modal-body input[name="update-payroll"]`)).value = response.data.updatedAt.slice(0, 10);;
+            }     
+        })
         .catch(e => {
             console.log(e)
         })
@@ -472,6 +529,8 @@ function run() {
     getSubject()
     handleAddClass()
     handleAddSubject()
+    getSalary()
+    getStandarSalary()
 }
 
 run();

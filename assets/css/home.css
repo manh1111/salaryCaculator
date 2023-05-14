@@ -63,13 +63,15 @@
     width: 100px;
 }
 
-.fa-xmark{
+.fa-xmark,
+.fa-pen{
     padding: 5px
 }
 
 .nav-btn:hover,
 .handle-info-btn button:hover,
-.fa-xmark:hover{
+.fa-xmark:hover,
+.fa-pen:hover{
     background: #a73838;
     color: #fff;
     box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%),
@@ -193,6 +195,7 @@
 .payroll-modal,
 .modal-add-teacher,
 .modal-create-class,
+.modal-update-class,
 .modal-create-subject{
     position: fixed;
     display: none;
@@ -210,6 +213,7 @@
 
 .add-teacher-container,
 .create-class-container,
+.create-update-sub-container,
 .create-subject-container{
     position: relative;
     width: fit-content;
@@ -224,6 +228,8 @@
 
 .payroll-modal .payroll-container{
     position: relative;
+    height: 310px;
+    width: 500px;
     background-color: #ffffff;
     border-radius: 10px;
     display: flex;

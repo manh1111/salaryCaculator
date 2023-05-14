@@ -278,6 +278,43 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="modal-update-class">
+                <div class="create-update-sub-container">
+                    <div class="class-left">
+                        <div class="block-input">
+                            <Label>Giáo viên dạy: </Label>
+                            <select name="name">
+                                <option value="" class="nameOption" style="display: none;"></option>
+                            </select>
+                        </div>
+                        <div class="block-input">
+                            <Label>Môn: </Label>
+                            <select name="name-subject">
+                                <option value="" class="nameSubject-option" style="display: none;"></option>
+                            </select>
+                        </div>
+                        <div class="block-input">
+                            <Label>Lớp: </Label>
+                            <input type="text" name="name-Class" value="">
+                        </div>
+                    </div>
+                    <div class="class-right">
+                        <div class="block-input">
+                            <Label>Số sinh viên: </Label>
+                            <input type="text" name="studentNumber" value="">
+                        </div>
+                        <div class="handle-info-btn" style="margin-top: 120px;">
+                            <button class="update-class">Chỉnh sửa</button>
+                            <button class="js-close-update-class">
+                                Đóng
+                                <i class="fa-solid fa-xmark close-btn js-close-btn"></i>
+                            </button>
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="modal-create-subject">
                 <div class="create-subject-container">
@@ -324,11 +361,15 @@
                         <i class="fa-solid fa-xmark close-btn js-close-payroll-btn"></i>
                         <div class="input-payroll">
                             <Label>Lương chuẩn: </Label>
-                            <input type="text" name="input-payroll">
+                            <input type="text" name="input-payroll" readonly>
+                        </div>
+                        <div class="input-payroll">
+                            <Label>Ngày tạo mới: </Label>
+                            <input type="date" name="create-payroll" readonly>
                         </div>
                         <div class="input-payroll">
                             <Label>Ngày cập nhật: </Label>
-                            <input type="date" name="update-payroll">
+                            <input type="date" name="update-payroll" readonly>
                         </div>
                         <div class="payroll-btn">
                             <button class="edit-btn">Chỉnh sửa</button>
