@@ -265,15 +265,21 @@ function getClass() {
                     }
                     let data = [i + 1, classObject.name, nameSub, classObject.Teacher.name,
                         classObject.studentNumber]
-                        for (let j = 0; j < 6; j++) {
+                        for (let j = 0; j < 7; j++) {
                         let td = document.createElement("td");
                         td.textContent = data[j]
                         if (j === 5) {
-                            let i = document.createElement('i')
-                            i.classList.add('fa-solid')
-                            i.classList.add('fa-xmark')
-                            td.appendChild(i)
-                        }
+                            let iElement = document.createElement('i')
+                            iElement.classList.add('fa-solid')
+                            iElement.classList.add('fa-xmark')
+                            td.appendChild(iElement)
+                            }
+                            if (j === 6) {
+                            let i2Element = document.createElement('i')
+                            i2Element.classList.add('fa-solid')
+                            i2Element.classList.add('fa-pen')
+                            td.appendChild(i2Element)
+                            }   
                         tr.appendChild(td)
                     }
                     listClass.appendChild(tr)
@@ -389,7 +395,7 @@ function getSubject() {
                     let subjectObject = response.data[i];
                     const data = [i + 1, subjectObject.name, subjectObject.subjectCode, subjectObject.subjectCoefficients,
                         subjectObject.lession]
-                    for (let j = 0; j < 6; j++) {
+                    for (let j = 0; j < 7; j++) {
                         let td = document.createElement("td");
                         td.textContent = data[j]
                         if (j == 5) {
@@ -399,6 +405,12 @@ function getSubject() {
                             iElement.onclick = ()=>{handleDeleteSubject(listIDSubject[i])}
                             td.appendChild(iElement)
                         }
+                        if (j === 6) {
+                            let i2Element = document.createElement('i')
+                            i2Element.classList.add('fa-solid')
+                            i2Element.classList.add('fa-pen')
+                            td.appendChild(i2Element)
+                            } 
                         tr.appendChild(td)
                     }
                     listSubject.appendChild(tr)
