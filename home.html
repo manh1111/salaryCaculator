@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,20 +10,23 @@
     <link rel="stylesheet" href="/assets/fontawesome-free-6.3.0-web/css/all.min.css">
     <title>Document</title>
 </head>
+
 <body>
 
     <div class="main">
         <div id="header">
             <div class="header__nav">
                 <div class="logo" style="width: 20%;">
-                    <img width="125px" height="60px" src="/assets/img/logo.jpg" alt="thanglong-logo" class="logo-header">
+                    <img width="125px" height="60px" src="/assets/img/logo.jpg" alt="thanglong-logo"
+                        class="logo-header">
                 </div>
                 <div class="nav-content" style="width: 60%;">
                     <ul>
                         <li class="js-item">Giảng viên</li>
                         <li class="js-item">Bảng lương</li>
                         <li class="info-class js-item">Lớp học</li>
-                        <li class="sta-salary js-sta-salary">Lương chuẩn</li>
+                        <li class="js-item">Môn học</li>
+                        <li class="sta-salary js-sta-salary" style="width: 170px;">Lương chuẩn</li>
                     </ul>
                 </div>
                 <div class="nav-page" style="width: 20%;">
@@ -35,16 +39,16 @@
         <div id="content">
             <div class="sider js-sider show-content">
                 <div class="input-id">
-                    <input type="text" name="search-id" style="border-radius: 10px; margin: 15px 3px 15px 15px; border: 1px solid #ccc; padding: 3px; width: 140px;">
+                    <input type="text" name="search-id"
+                        style="border-radius: 10px; margin: 15px 3px 15px 15px; border: 1px solid #ccc; padding: 3px; width: 140px;">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <i class="fa-solid fa-plus add-teacher-btn i-item"></i>
                 </div>
                 <ul id="list-teacher">
-
                 </ul>
             </div>
 
-            
+
             <div class="show-info js-show-item show-content">
                 <div class="info-left">
                     <div class="block-input">
@@ -84,15 +88,15 @@
                         <Label>Địa chỉ: </Label>
                         <input type="text" name="address">
                     </div>
-                    <div class="handle-info-btn" >
+                    <div class="handle-info-btn">
                         <button class="edit-btn">Chỉnh sửa</button>
                         <button class="update-btn">Cập nhật</button>
                     </div>
                 </div>
             </div>
-            
 
-            
+
+
             <div class="show-payroll js-show-item hide">
                 <div class="show">
                     <div class="info-teach">
@@ -108,16 +112,15 @@
                                 <th>Số sinh viên</th>
                                 <th>Số tiền</th>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td class="class">A707</td>
-                                    <td class="name-subject">Giải tích 1</td>
-                                    <td class="num-lesson">1</td>
-                                    <td class="num-student">1</td>
-                                    <td class="salary-per-sub">00000</td>
+                            <tbody class="list-class">
+                                <tr class="class">
+                                    <td class="stt"></td>
+                                    <td class="name-class"></td>
+                                    <td class="name-subject"></td>
+                                    <td class="subjectCode"></td>
+                                    <td class="lession"></td>
+                                    <td class="studentNumber"></td>
                                 </tr>
-                                
                                 <tr>
                                     <td colspan="5">Tổng tiền lương</td>
                                     <td class="total-salary">00000</td>
@@ -134,167 +137,220 @@
             </div>
 
             <div class="show-info-class js-show-item">
-                <div>
-                    <div class="info-teach">
-                        <p class="code-teach">Mã giảng viên: </p>
-                        <p class="name">Họ và tên: </p>
-                        <p class="degree">Bằng cấp: </p>
-                    </div>
-                    <table class="show-table" style="width: 800px; border-radius: 10px; overflow: scroll; max-height: 80px;">
-                        <thead style="display: table-header-group; background-color: #eadcdc;">
-                            <th>STT</th>
-                            <th>Lớp</th>
-                            <th>Môn học</th>
-                            <th>Số tiết</th>
-                            <th>Số sinh viên</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td class="class">A707</td>
-                                <td class="name-subject">Giải tích 1</td>
-                                <td class="num-lesson">1</td>
-                                <td class="num-student">1</td>
-                            </tr>        
-                        </tbody>
-                    </table>
-                </div>
+                <table class="show-table"
+                    style="width: 800px; border-radius: 10px; overflow: scroll; max-height: 80px;">
+                    <thead style="display: table-header-group; background-color: #eadcdc;">
+                        <th>STT</th>
+                        <th>Lớp</th>
+                        <th>Môn học</th>
+                        <th>Giáo viên phụ trách</th>
+                        <th>Số sinh viên</th>
+                        <th>Xóa</th>
+                    </thead>
+                    <tbody id="list-class">
+                        <tr class="class">
+                            <td class="stt"></td>
+                            <td class="name-class"></td>
+                            <td class="name-subject"></td>
+                            <td class="name"></td>
+                            <td class="studentNumber"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
                 <div class="class-btn">
                     <button class="edit-btn" style="width: 111px;">Chỉnh sửa</button>
                     <button class="update-btn">Cập nhật</button>
                     <button class="create-btn">Tạo mới</button>
                 </div>
             </div>
-        
-        <div class="modal-add-teacher">
-            <div class="add-teacher-container">
-                <div class="add-left">
-                    <div class="block-input">
-                        <Label>Họ và tên: </Label>
-                        <input type="text" name="name" value="">
-                    </div>
-                    <div class="block-input">
-                        <Label>Ngày sinh: </Label>
-                        <input type="date" name="dob">
-                    </div>
-                    <div class="block-input">
-                        <Label>Email: </Label>
-                        <input type="email" name="email">
-                    </div>
-                    <div class="block-input">
-                        <Label>Số điện thoại: </Label>
-                        <input type="text" name="phoneNumber">
-                    </div>
+
+            <div class="show-info-subject js-show-item">
+                <table class="show-table"
+                    style="width: 800px; border-radius: 10px; overflow: scroll; max-height: 80px;">
+                    <thead style="display: table-header-group; background-color: #eadcdc;">
+                        <th>STT</th>
+                        <th>Môn học</th>
+                        <th>Mã môn học</th>
+                        <th>Hệ số môn</th>
+                        <th>Số tiết</th>
+                        <th>Xóa</th>
+                    </thead>
+                    <tbody id="list-subject">
+                        <tr>
+                            <td class="stt"></td>
+                            <td class="name-subject"></td>
+                            <td class="subjectCode"></td>
+                            <td class="subjectCoefficients"></td>
+                            <td class="lession"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="subject-btn">
+                    <button class="edit-subject-btn" style="width: 111px;">Chỉnh sửa</button>
+                    <button class="update-subject-btn">Cập nhật</button>
+                    <button class="create-subject-btn">Tạo mới</button>
                 </div>
-                <div class="add-right">
-                    <div class="block-input">
-                        <Label>Bằng cấp: </Label>
-                        <select name="degree">
-                            <!-- <option value="Tập sự">Tập sự</option> -->
-                            <option value="graduate">Tốt nghiệp đại học</option>
-                            <option value="master">Thạc sĩ</option>
-                            <option value="docter">Tiến sĩ</option>
-                            <option value="assosiateProfessor">Phó giáo sư</option>
-                            <option value="professor">Giáo sư</option>
-                        </select>
+            </div>
+
+            <div class="modal-add-teacher">
+                <div class="add-teacher-container">
+                    <div class="add-left">
+                        <div class="block-input">
+                            <Label>Họ và tên: </Label>
+                            <input type="text" name="name" value="">
+                        </div>
+                        <div class="block-input">
+                            <Label>Ngày sinh: </Label>
+                            <input type="date" name="dob">
+                        </div>
+                        <div class="block-input">
+                            <Label>Email: </Label>
+                            <input type="email" name="email">
+                        </div>
+                        <div class="block-input">
+                            <Label>Số điện thoại: </Label>
+                            <input type="text" name="phoneNumber">
+                        </div>
                     </div>
-                    <div class="block-input">
-                        <Label>Địa chỉ: </Label>
-                        <input type="text" name="address">
-                    </div>
-                    <div class="handle-info-btn" style="margin-top: 115px;">
-                        <button class="add-teacher">Tạo mới</button>
-                        <button class="close-add-teacher">
-                            Đóng
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-                        
+                    <div class="add-right">
+                        <div class="block-input">
+                            <Label>Bằng cấp: </Label>
+                            <select name="degree">
+                                <!-- <option value="Tập sự">Tập sự</option> -->
+                                <option value="graduate">Tốt nghiệp đại học</option>
+                                <option value="master">Thạc sĩ</option>
+                                <option value="docter">Tiến sĩ</option>
+                                <option value="assosiateProfessor">Phó giáo sư</option>
+                                <option value="professor">Giáo sư</option>
+                            </select>
+                        </div>
+                        <div class="block-input">
+                            <Label>Địa chỉ: </Label>
+                            <input type="text" name="address">
+                        </div>
+                        <div class="handle-info-btn" style="margin-top: 115px;">
+                            <button class="add-teacher">Tạo mới</button>
+                            <button class="close-add-teacher">
+                                Đóng
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="modal-create-class">
-            <div class="create-class-container">
-                <div class="class-left">
-                    <div class="block-input">
-                        <Label>Mã giáo viên: </Label>
-                        <input type="text" name="code-teach">
+            <div class="modal-create-class">
+                <div class="create-class-container">
+                    <div class="class-left">
+                        <div class="block-input">
+                            <Label>Giáo viên dạy: </Label>
+                            <select name="name">
+                                <option value="" class="nameOption" style="display: none;"></option>
+                            </select>
+                        </div>
+                        <div class="block-input">
+                            <Label>Môn: </Label>
+                            <select name="name-subject">
+                                <option value="" class="nameSubject-option" style="display: none;"></option>
+                            </select>
+                        </div>
+                        <div class="block-input">
+                            <Label>Lớp: </Label>
+                            <input type="text" name="name-Class" value="">
+                        </div>
                     </div>
-                    <div class="block-input">
-                        <Label>Họ và tên: </Label>
-                        <input type="text" name="name" value="">
-                    </div>
-                    <div class="block-input">
-                        <Label>Lớp: </Label>
-                        <input type="text" name="class" value="">
-                    </div>
-                    <div class="block-input">
-                        <Label>Môn: </Label>
-                        <input type="text" name="name-subject" value="">
-                    </div>
-                </div>
-                <div class="class-right">
-                    <div class="block-input">
-                        <Label>Hệ số môn: </Label>
-                        <input type="text" name="sub-coefficients" value="">
-                    </div>
-                    <div class="block-input">
-                        <Label>Số tiết: </Label>
-                        <input type="text" name="num-lesson" value="">
-                    </div>
-                    <div class="block-input">
-                        <Label>Số sinh viên: </Label>
-                        <input type="text" name="num-student" value="">
-                    </div>
-                    <div class="handle-info-btn" style="margin-top: 50px;">
-                        <button class="create-class">Tạo mới</button>
-                        <button class="js-close-create-class">
-                            Đóng
-                            <i class="fa-solid fa-xmark close-btn js-close-btn"></i>
-                        </button>
-        
+                    <div class="class-right">
+                        <div class="block-input">
+                            <Label>Số sinh viên: </Label>
+                            <input type="text" name="studentNumber" value="">
+                        </div>
+                        <div class="handle-info-btn" style="margin-top: 120px;">
+                            <button class="create-class">Tạo mới</button>
+                            <button class="js-close-create-class">
+                                Đóng
+                                <i class="fa-solid fa-xmark close-btn js-close-btn"></i>
+                            </button>
+                
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-
-        <div class="payroll-modal">
-            <div class="payroll-container">
-                <div class="modal-heading">
-                    <b style="font-size: 20px; margin: 8px;">LƯƠNG CHUẨN</b>
-                </div>
-                <div class="modal-body">
-                    <i class="fa-solid fa-xmark close-btn js-close-payroll-btn"></i>
-                    <div class="input-payroll">
-                        <Label>Lương chuẩn: </Label>
-                        <input type="text" name="input-payroll">
-                    </div>
-                    <div class="input-payroll">
-                        <Label>Ngày cập nhật: </Label>
-                        <input type="date" name="update-payroll">
-                    </div>
-                    <div class="payroll-btn">
-                        <button class="edit-btn">Chỉnh sửa</button>
-                        <button class="update-btn">Cập nhật</button>
+            <div class="modal-create-subject">
+                <div class="create-subject-container">
+                    <div class="create-class-container">
+                        <div class="class-left">
+                            <div class="block-input">
+                                <Label>Môn: </Label>
+                                <input type="text" name="name-subject" value="">
+                            </div>
+                            <div class="block-input">
+                                <Label>Mã môn: </Label>
+                                <input type="text" name="subjectCode" value="">
+                            </div>
+                            <div class="block-input">
+                                <Label>Hệ số môn: </Label>
+                                <input type="text" name="sub-coefficients" value="">
+                            </div>
+                        </div>
+                        <div class="class-right">
+                            <div class="block-input">
+                                <Label>Số tiết: </Label>
+                                <input type="text" name="lession" value="">
+                            </div>                        
+                            <div class="handle-info-btn" style="margin-top: 120px;">
+                                <button class="create-subject">Tạo mới</button>
+                                <button class="js-close-create-subject">
+                                    Đóng
+                                    <i class="fa-solid fa-xmark close-btn js-close-btn"></i>
+                                </button>
+                    
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="footer">
-            <div class="footer__container">
-                <span>Địa chỉ: Đường Nghiêm Xuân Yêm - Đại Kim - Hoàng Mai - Hà Nội</span><br>
-                <span>Điện thoại hỗ trợ kỹ thuật: (04) 355 92 678. Website: 
+
+
+            <div class="payroll-modal">
+                <div class="payroll-container">
+                    <div class="modal-heading">
+                        <b style="font-size: 20px; margin: 8px;">LƯƠNG CHUẨN</b>
+                    </div>
+                    <div class="modal-body">
+                        <i class="fa-solid fa-xmark close-btn js-close-payroll-btn"></i>
+                        <div class="input-payroll">
+                            <Label>Lương chuẩn: </Label>
+                            <input type="text" name="input-payroll">
+                        </div>
+                        <div class="input-payroll">
+                            <Label>Ngày cập nhật: </Label>
+                            <input type="date" name="update-payroll">
+                        </div>
+                        <div class="payroll-btn">
+                            <button class="edit-btn">Chỉnh sửa</button>
+                            <button class="update-btn">Cập nhật</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footer">
+                <div class="footer__container">
+                    <span>Địa chỉ: Đường Nghiêm Xuân Yêm - Đại Kim - Hoàng Mai - Hà Nội</span><br>
+                    <span>Điện thoại hỗ trợ kỹ thuật: (04) 355 92 678. Website:
                         <a href="https://thanglong.edu.vn/" style="color: black;">https://thanglong.edu.vn/, </a>
                         mail:
                         <a href="mailto: p.cntt@thanglong.edu.vn" style="color: black;"> p.cntt@thanglong.edu.vn.</a>
-                </span>
+                    </span>
+                </div>
             </div>
+
         </div>
 
-    </div>
-
-    <script src="/js/home.js"></script>
+        <script src="/js/home.js"></script>
 </body>
+
 </html>

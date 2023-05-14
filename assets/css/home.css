@@ -49,6 +49,7 @@
 }
 .nav-btn,
 .payroll-btn button,
+.subject-btn button,
 .class-btn button,
 .handle-info-btn button{
     border: none;
@@ -59,10 +60,16 @@
     border-radius: 10px;
     padding: 8px;
     background-color: #eecfcf;
+    width: 100px;
+}
+
+.fa-xmark{
+    padding: 5px
 }
 
 .nav-btn:hover,
-.handle-info-btn button:hover{
+.handle-info-btn button:hover,
+.fa-xmark:hover{
     background: #a73838;
     color: #fff;
     box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%),
@@ -78,9 +85,11 @@
     justify-content: center;
     align-items: center;
     height: 80vh;
+    padding-top: 65px;
 }
 
 .show-info-class,
+.show-info-subject,
 .show-payroll,
 .create-teach,
 .show-info{
@@ -92,6 +101,7 @@
 }
 
 .show-info-class,
+.show-info-subject,
 .show-payroll,
 .show-payroll{
     flex-direction: column;
@@ -104,7 +114,8 @@
     font-size: 18px;
 }
 
-.class-btn{
+.class-btn,
+.subject-btn{
     display: flex;
     width: 500px;
     flex-direction: row;
@@ -181,7 +192,8 @@
 
 .payroll-modal,
 .modal-add-teacher,
-.modal-create-class{
+.modal-create-class,
+.modal-create-subject{
     position: fixed;
     display: none;
     width: 100%;
@@ -197,7 +209,8 @@
 }
 
 .add-teacher-container,
-.create-class-container{
+.create-class-container,
+.create-subject-container{
     position: relative;
     width: fit-content;
     height: fit-content;
