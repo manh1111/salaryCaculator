@@ -19,7 +19,11 @@ const modal = $('.payroll-modal')
 const staSalary = $('.js-sta-salary')
 const modalContainer = $('.payroll-container')
 staSalary.addEventListener('click', () => {
-    modal.classList.add('show-modal');
+    modal.classList.add('show-modal')
+    staSalary.classList.add('active')
+    items.forEach((item) => {
+        item.classList.remove('active')
+    })
 })
 closeBtn.addEventListener('click', () => {
     modal.classList.remove('show-modal');
@@ -74,18 +78,15 @@ const i = $('.i-item')
 
 items.forEach((item, index) => {
     item.addEventListener('click', () => {
-        item.classList.add('active')
-        contentItems.forEach((item) => {
-            if (item.classList.contains('show-content')) {
-                item.classList.remove('show-content')
-            }
-            if (item.classList.contains('active')) {
-                item.classList.remove('active')
-            }
-
+        items.forEach((item) => {
+            item.classList.remove('active') 
+            staSalary.classList.remove('active')
         })
-        showItem = contentItems[index]
+        contentItems.forEach((item) => {
+                item.classList.remove('show-content')
+        })
         item.classList.add('active')
+        showItem = contentItems[index]
         if (index == 0 || index == 1) {
             $('.js-sider').classList.add('show-content')
         }
@@ -103,7 +104,8 @@ items.forEach((item, index) => {
             i.classList.add('hide')
         }
     })
-
+    
+      
 });
 
 
