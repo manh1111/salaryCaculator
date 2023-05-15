@@ -74,27 +74,28 @@ const i = $('.i-item')
 
 items.forEach((item, index) => {
     item.addEventListener('click', () => {
-        contentItems.forEach((item, index) => {
+        item.classList.add('active')
+        contentItems.forEach((item) => {
             if (item.classList.contains('show-content')) {
                 item.classList.remove('show-content')
-            }else{}
+            }
             if (item.classList.contains('active')) {
                 item.classList.remove('active')
-            } else {}
+            }
 
         })
         showItem = contentItems[index]
+        item.classList.add('active')
         if (index == 0 || index == 1) {
             $('.js-sider').classList.add('show-content')
         }
         else {
             $('.js-sider').classList.remove('show-content')
         }
-        item.classList.add('active')
         showItem.classList.add('show-content')
         $('.input-id').addEventListener('click', (event) => {
             event.stopPropagation();
-        })
+        })                                              
         if (index == 0) {
             i.classList.remove('hide')
         }
