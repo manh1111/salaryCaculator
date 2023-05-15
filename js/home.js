@@ -148,7 +148,7 @@ const showTeacher = () => {
             for(let i = 0;i < salaryTeacher.classAndLession.length; i++) {
                 const item = salaryTeacher.classAndLession[i];
                 let tr = document.createElement("tr");
-                const data = [i, item.class, salaryTeacher?.listSubject[i], item?.lession, item.studentNumber, item?.salary]
+                const data = [i + 1, item.class, salaryTeacher?.listSubject[i], item?.lession, item.studentNumber, item?.salary]
                 for (let j = 0; j < 6; j++) {
                     let td = document.createElement("td");
                     td.textContent = data[j];
