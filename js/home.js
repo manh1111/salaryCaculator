@@ -77,7 +77,11 @@ items.forEach((item, index) => {
         contentItems.forEach((item, index) => {
             if (item.classList.contains('show-content')) {
                 item.classList.remove('show-content')
-            }
+            }else{}
+            if (item.classList.contains('active')) {
+                item.classList.remove('active')
+            } else {}
+
         })
         showItem = contentItems[index]
         if (index == 0 || index == 1) {
@@ -86,6 +90,7 @@ items.forEach((item, index) => {
         else {
             $('.js-sider').classList.remove('show-content')
         }
+        item.classList.add('active')
         showItem.classList.add('show-content')
         $('.input-id').addEventListener('click', (event) => {
             event.stopPropagation();

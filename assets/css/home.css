@@ -41,7 +41,8 @@
     display: none !important
 }
 
-.header__nav li:hover {
+.header__nav li:hover, 
+.active{
     color: #000;
     cursor: pointer;
     background-color: #f4e7e7;
