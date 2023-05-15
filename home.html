@@ -53,25 +53,25 @@
                 <div class="info-left">
                     <div class="block-input">
                         <Label>Mã giáo viên: </Label>
-                        <input type="text" name="teacherCode">
+                        <input type="text" name="teacherCode" readonly>
                     </div>
                     <div class="block-input">
                         <Label>Họ và tên: </Label>
-                        <input type="text" name="name" value="">
+                        <input type="text" name="name" value=""readonly>
                     </div>
                     <div class="block-input">
                         <Label>Ngày sinh: </Label>
-                        <input type="date" name="dob">
+                        <input type="date" name="dob" readonly>
                     </div>
                     <div class="block-input">
                         <Label>Email: </Label>
-                        <input type="email" name="email">
+                        <input type="email" name="email"readonly>
                     </div>
                 </div>
                 <div class="info-right">
                     <div class="block-input">
                         <Label>Số điện thoại: </Label>
-                        <input type="text" name="phoneNumber">
+                        <input type="text" name="phoneNumber" readonly>
                     </div>
                     <div class="block-input">
                         <Label>Bằng cấp: </Label>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="block-input">
                         <Label>Địa chỉ: </Label>
-                        <input type="text" name="address">
+                        <input type="text" name="address" readonly>
                     </div>
                     <div class="handle-info-btn">
                         <button class="edit-btn">Chỉnh sửa</button>
@@ -248,7 +248,7 @@
             </div>
             
             <div class="modal-update-class">
-                <div class="create-update-sub-container">
+                <div class="update-class-container">
                     <div class="class-left">
                         <div class="block-input">
                             <Label>Giáo viên dạy: </Label>
@@ -284,10 +284,47 @@
                 </div>
             </div>
 
+            <div class="modal-update-subject">
+                <div class="update-subject-container">
+                    <div class="class-left">
+                        <div class="block-input">
+                            <Label>Môn học: </Label>
+                            <input type="text" name="name" value="">
+                        </div>
+                        <div class="block-input">
+                            <Label>Mã môn học: </Label>
+                            <input type="text" name="subject-code" value="">
+                        </div>
+                        <div class="block-input">
+                            <Label>Hệ số môn: </Label>
+                            <select name="sub-coefficients">
+                                <option value="0" class="option">0</option>
+                                <option value="0.1" class="option">0.1</option>
+                                <option value="0.2" class="option">0.2</option>
+                                <option value="0.3" class="option">0.3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="class-right">
+                        <div class="block-input">
+                            <Label>Số tiết: </Label>
+                            <input type="text" name="lession" value="">
+                        </div>
+                        <div class="handle-info-btn" style="margin-top: 120px;">
+                            <button class="update-subject">Chỉnh sửa</button>
+                            <button class="js-close-update-subject">
+                                Đóng
+                                <i class="fa-solid fa-xmark close-btn js-close-btn"></i>
+                            </button>
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="modal-create-subject">
                 <div class="create-subject-container">
-                    <div class="create-class-container">
-                        <div class="class-left">
+                    <div class="class-left">
                             <div class="block-input">
                                 <Label>Môn: </Label>
                                 <input type="text" name="name-subject" value="">
@@ -298,22 +335,26 @@
                             </div>
                             <div class="block-input">
                                 <Label>Hệ số môn: </Label>
-                                <input type="text" name="sub-coefficients" value="">
+                                <select name="sub-coefficients">
+                                    <option value="0" class="option">0</option>
+                                    <option value="0.1" class="option">0.1</option>
+                                    <option value="0.2" class="option">0.2</option>
+                                    <option value="0.3" class="option">0.3</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="class-right">
-                            <div class="block-input">
-                                <Label>Số tiết: </Label>
-                                <input type="text" name="lession" value="">
-                            </div>                        
-                            <div class="handle-info-btn" style="margin-top: 120px;">
-                                <button class="create-subject">Tạo mới</button>
-                                <button class="js-close-create-subject">
-                                    Đóng
-                                    <i class="fa-solid fa-xmark close-btn js-close-btn"></i>
-                                </button>
-                    
-                            </div>
+                    <div class="class-right">
+                        <div class="block-input">
+                            <Label>Số tiết: </Label>
+                            <input type="text" name="lession" value="">
+                        </div>                        
+                        <div class="handle-info-btn" style="margin-top: 120px;">
+                            <button class="create-subject">Tạo mới</button>
+                            <button class="js-close-create-subject">
+                                Đóng
+                                <i class="fa-solid fa-xmark close-btn js-close-btn"></i>
+                            </button>
+                
                         </div>
                     </div>
                 </div>

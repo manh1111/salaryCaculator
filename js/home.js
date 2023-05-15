@@ -331,6 +331,7 @@ function getClass() {
                             td.appendChild(iElement)
                             let i2Element = document.createElement('i')
                             i2Element.classList.add('fa-solid', 'fa-pen')
+                            i2Element.onclick = ()=>{ handleUpdateClass(listIDClass[i])}
                             td.appendChild(i2Element)
                             td.classList.add('col-action')
                         }
@@ -367,6 +368,13 @@ function handleAddClass() {
         }
         createClass(data)
         createClassModal.classList.remove('show-modal')
+    }
+}
+
+function handleUpdateClass(id) {
+    $('.modal-update-class').classList.add('show-modal');
+    $('.js-close-update-class').onclick = () => {
+        $('.modal-update-class').classList.remove('show-modal');   
     }
 }
 
@@ -463,6 +471,7 @@ function getSubject() {
                             let i2Element = document.createElement('i')
                             i2Element.classList.add('fa-solid')
                             i2Element.classList.add('fa-pen')
+                            i2Element.onclick = ()=>{ handleUpdateSubject(listIDClass[i])}
                             td.appendChild(i2Element)
                             td.classList.add('col-action')
                         }
@@ -481,6 +490,12 @@ function getSubject() {
         })
 }
 
+function handleUpdateSubject(id) {
+    $('.modal-update-subject').classList.add('show-modal');
+    $('.js-close-update-subject').onclick = () => {
+        $('.modal-update-subject').classList.remove('show-modal');
+    }
+}
 
 function handleAddSubject() {
     const addSubjectBtn = $('.create-subject')
@@ -490,8 +505,13 @@ function handleAddSubject() {
         var key = ['name-subject', 'subjectCode', 'sub-coefficients', 'lession']
         var list = ['name', 'subjectCode', 'subjectCoefficients', 'lession']
         for (let i = 0; i < 4; i++) {
-            info[list[i]] = $((`.modal-create-subject input[name="${key[i]}"]`)).value
-            data[`${list[i]}`] = info[list[i]]
+            if (key[i] == 'sub-coefficients') {
+                data[`${list[i]}`] =  $((`.modal-create-subject select[name="sub-coefficients"]`)).value 
+            }
+            else {
+                info[list[i]] = $((`.modal-create-subject input[name="${key[i]}"]`)).value
+                data[`${list[i]}`] = info[list[i]]
+            }
         }
         createSubject(data)
         createSubModal.classList.remove('show-modal')

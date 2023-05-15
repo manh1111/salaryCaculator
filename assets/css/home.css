@@ -193,6 +193,7 @@
 .payroll-modal,
 .modal-add-teacher,
 .modal-create-class,
+.modal-update-subject,
 .modal-update-class,
 .modal-create-subject{
     position: fixed;
@@ -211,6 +212,8 @@
 
 .add-teacher-container,
 .create-class-container,
+.update-class-container,
+.update-subject-container,
 .create-update-sub-container,
 .create-subject-container{
     position: relative;
@@ -227,13 +230,14 @@
 .payroll-modal .payroll-container{
     position: relative;
     height: 310px;
-    width: 500px;
+    width: 360px;
     background-color: #ffffff;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     animation: displayModal ease 0.4s;
+    flex-direction: column;
 }
 
 .modal-body i{
