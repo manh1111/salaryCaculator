@@ -1,8 +1,17 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 let infoTeacher = undefined;
+const listSalary = $('.list__salary')
 const listInput = ['teacherCode', 'name', 'dob', 'email', 'phoneNumber', 'address']
 let dataListTeacher = []
+let dataListSalary = [];
+const RulesQualifications = {
+    graduate: 'Tốt nghiệp đại học',
+    master: 'Thạc sĩ',
+    docter: 'Tiến sĩ',
+    associateProfessor: 'Phó giáo sư',
+    professor: 'Giáo sư',
+}
 
 // payrollModal
 const closeBtn = $('.js-close-payroll-btn')
@@ -42,7 +51,7 @@ const createSubModal = $(".modal-create-subject")
 const closeCreateSub = $(".js-close-create-subject")
 createSubBtn.addEventListener('click', () => {
     createSubModal.classList.add('show-modal')
-    
+
 })
 closeCreateSub.addEventListener('click', () => {
     createSubModal.classList.remove('show-modal')
@@ -124,6 +133,48 @@ const showTeacher = () => {
     })
     let select = $('select[name="degree"]')
     select.value = infoTeacher.degree
+    const salaryTeacher = dataListSalary.find(item => item.teacherCode === infoTeacher.teacherCode)
+    if (salaryTeacher) {
+        while (listSalary.firstChild) {
+            listSalary.removeChild(listSalary.firstChild)
+        }
+        let codeTeach = $('.code-teacher');
+        let nameTeacher = $('.name-teacher')
+        let teacherDegree = $('.teacherDegree')
+        codeTeach.textContent = `Mã giáo viên: ${salaryTeacher.teacherCode}`
+        nameTeacher.textContent = `Họ và tên: ${salaryTeacher.nameTeacher}`
+        teacherDegree.textContent = `Bằng cấp: ${RulesQualifications[`${salaryTeacher.degree}`]}`
+        if (salaryTeacher.classAndLession && salaryTeacher.classAndLession.length > 0) {
+            for(let i = 0;i < salaryTeacher.classAndLession.length; i++) {
+                const item = salaryTeacher.classAndLession[i];
+                let tr = document.createElement("tr");
+                const data = [i, item.class, salaryTeacher?.listSubject[i], item?.lession, item.studentNumber, item?.salary]
+                for (let j = 0; j < 6; j++) {
+                    let td = document.createElement("td");
+                    td.textContent = data[j];
+                    tr.appendChild(td);
+                }
+                listSalary.appendChild(tr)
+            }
+            let trTotalSalary = document.createElement("tr")
+            let tdTotalText = document.createElement("td")
+            let tdTotalSalary = document.createElement("td")
+            tdTotalText.colSpan = 5
+            tdTotalText.textContent = "Tổng tiền lương"
+            tdTotalSalary.textContent = salaryTeacher.salary
+            trTotalSalary.appendChild(tdTotalText);
+            trTotalSalary.appendChild(tdTotalSalary);
+            listSalary.appendChild(trTotalSalary);
+        }
+        else {
+            let tr = document.createElement("tr")
+            let td = document.createElement("td")
+            td.colSpan = 6
+            td.innerText = "No Data"
+            tr.appendChild(td)
+            listSalary.appendChild(tr)
+        }
+    }
 }
 
 const listTeacher = $('#list-teacher')
@@ -141,7 +192,6 @@ const showSider = (data) => {
         li.onclick = () => {
             infoTeacher = teacher;
             showTeacher()
-            
         }
         listTeacher.appendChild(li);
     }
@@ -163,7 +213,7 @@ function getTeacher() {
         .then((response) => {
             if (response.success) {
                 dataListTeacher = [...response.data];
-                for (let i = 0; i < response.data.length; i++){
+                for (let i = 0; i < response.data.length; i++) {
                     listIDTeacher[i] = response.data[i]._id
                     listNameTeacher[i] = response.data[i].name
                 }
@@ -237,21 +287,16 @@ function handleAddTeacher() {
 
 const apiDeleteClass = 'https://103.69.193.30.nip.io/classes/delete'
 function handleDeleteClass(id) {
-    fetch(apiDeleteClass +"?id=" + id, {
+    fetch(apiDeleteClass + "?id=" + id, {
         method: "Delete",
-        //     mode: "cors", // no-cors, *cors, same-origin
-        //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        //     credentials: "include", // include, *same-origin, omit
         headers: { 'Content-Type': 'application/json' },
-        //     redirect: "follow", // manual, *follow, error
-        //     referrerPolicy: "no-referrer",
     })
-    .then(
-        getClass()
-    )
-    .catch(e => {
-        console.log(e)
-    })
+        .then(() => {
+            getClass()
+        })
+        .catch(e => {
+            console.log(e)
+        })
 }
 
 let listIDClass = []
@@ -275,31 +320,28 @@ function getClass() {
                     let tr = document.createElement("tr");
                     let classObject = response.data[i];
                     let data = [i + 1, classObject.name, classObject?.Subject?.name || "Đã xóa", classObject.Teacher.name,
-                        classObject.studentNumber]
-                        for (let j = 0; j < data.length + 2; j++) {
+                    classObject.studentNumber]
+                    for (let j = 0; j < 6; j++) {
                         let td = document.createElement("td");
                         td.textContent = data[j]
                         if (j === 5) {
                             let iElement = document.createElement('i')
-                            iElement.classList.add('fa-solid')
-                            iElement.classList.add('fa-xmark')
-                            iElement.onclick = ()=>{handleDeleteClass(listIDClass[i])}
+                            iElement.classList.add('fa-solid', 'fa-xmark')
+                            iElement.onclick = () => { handleDeleteClass(listIDClass[i]) }
                             td.appendChild(iElement)
-                            }
-                            if (j === 6) {
                             let i2Element = document.createElement('i')
-                            i2Element.classList.add('fa-solid')
-                            i2Element.classList.add('fa-pen')
+                            i2Element.classList.add('fa-solid', 'fa-pen')
                             td.appendChild(i2Element)
-                            }   
+                            td.classList.add('col-action')
+                        }
                         tr.appendChild(td)
                     }
                     listClass.appendChild(tr)
                 }
             }
-            for (let i = 0; i < response.data.length; i++){
-                    listIDClass[i] = response.data[i]._id
-                    listNameClass[i] = response.data[i].name
+            for (let i = 0; i < response.data.length; i++) {
+                listIDClass[i] = response.data[i]._id
+                listNameClass[i] = response.data[i].name
             }
         })
         .catch(e => {
@@ -319,9 +361,9 @@ function handleAddClass() {
                 data.Teacher = classTeacher
                 let subjectName = $('.modal-create-class select[name="name-subject"]').value
                 data.Subject = subjectName
-            }             
-            data['name'] = $(`.modal-create-class input[name="name-Class"]`).value 
-            data['studentNumber'] = $(`.modal-create-class input[name="studentNumber"]`).value 
+            }
+            data['name'] = $(`.modal-create-class input[name="name-Class"]`).value
+            data['studentNumber'] = $(`.modal-create-class input[name="studentNumber"]`).value
         }
         createClass(data)
         createClassModal.classList.remove('show-modal')
@@ -360,7 +402,9 @@ function createClass(data) {
         .then(function (response) {
             return response.json();
         })
-        .then(getClass())
+        .then(() => {
+            getClass()
+        })
         .catch(e => {
             console.log(e)
         })
@@ -368,7 +412,7 @@ function createClass(data) {
 
 const apiDeleteSubject = 'https://103.69.193.30.nip.io/subject/delete'
 function handleDeleteSubject(id) {
-    fetch(apiDeleteSubject +"?id=" + id, {
+    fetch(apiDeleteSubject + "?id=" + id, {
         method: "Delete",
         //     mode: "cors", // no-cors, *cors, same-origin
         //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -377,12 +421,12 @@ function handleDeleteSubject(id) {
         //     redirect: "follow", // manual, *follow, error
         //     referrerPolicy: "no-referrer",
     })
-    .then(
-        getSubject()
-    )
-    .catch(e => {
-        console.log(e)
-    })
+        .then(() => {
+            getSubject()
+        })
+        .catch(e => {
+            console.log(e)
+        })
 }
 
 let listIDSubject = []
@@ -406,29 +450,28 @@ function getSubject() {
                     let tr = document.createElement("tr");
                     let subjectObject = response.data[i];
                     const data = [i + 1, subjectObject.name, subjectObject.subjectCode, subjectObject.subjectCoefficients,
-                        subjectObject.lession]
-                    for (let j = 0; j < 7; j++) {
+                    subjectObject.lession]
+                    for (let j = 0; j < 6; j++) {
                         let td = document.createElement("td");
                         td.textContent = data[j]
                         if (j == 5) {
                             let iElement = document.createElement('i')
                             iElement.classList.add('fa-solid')
                             iElement.classList.add('fa-xmark')
-                            iElement.onclick = ()=>{handleDeleteSubject(listIDSubject[i])}
+                            iElement.onclick = () => { handleDeleteSubject(listIDSubject[i]) }
                             td.appendChild(iElement)
-                        }
-                        if (j === 6) {
                             let i2Element = document.createElement('i')
                             i2Element.classList.add('fa-solid')
                             i2Element.classList.add('fa-pen')
                             td.appendChild(i2Element)
-                            } 
+                            td.classList.add('col-action')
+                        }
                         tr.appendChild(td)
                     }
                     listSubject.appendChild(tr)
                 }
             }
-            for (let i = 0; i < response.data.length; i++){
+            for (let i = 0; i < response.data.length; i++) {
                 listIDSubject[i] = response.data[i]._id
                 listNameSubject[i] = response.data[i].name
             }
@@ -470,13 +513,15 @@ function createSubject(data) {
         .then(function (response) {
             response.json();
         })
-        .then(getSubject())
+        .then(() => {
+            getSubject()
+        })
         .catch(e => {
             console.log(e)
         })
 }
 
-const listSalary = $('.list-class')
+
 const apiGetSalary = 'https://103.69.193.30.nip.io/salary/get'
 function getSalary() {
     fetch(apiGetSalary)
@@ -488,11 +533,7 @@ function getSalary() {
         })
         .then((response) => {
             if (response.success) {
-                console.log(response)
-                while (listSalary.firstChild) {
-                    listSalary.removeChild(listSalary.firstChild)
-                }
-                
+                dataListSalary = [...response.data]
             }
         })
         .catch(e => {
@@ -514,7 +555,7 @@ function getStandarSalary() {
                 $((`.modal-body input[name="input-payroll"]`)).value = response.data.standardSalary;
                 $((`.modal-body input[name="create-payroll"]`)).value = response.data.createdAt.slice(0, 10);;
                 $((`.modal-body input[name="update-payroll"]`)).value = response.data.updatedAt.slice(0, 10);;
-            }     
+            }
         })
         .catch(e => {
             console.log(e)
@@ -523,7 +564,7 @@ function getStandarSalary() {
 
 
 function run() {
-    getTeacher(showTeacher);
+    getTeacher();
     handleAddTeacher()
     getClass()
     getSubject()

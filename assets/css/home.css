@@ -69,9 +69,7 @@
 }
 
 .nav-btn:hover,
-.handle-info-btn button:hover,
-.fa-xmark:hover,
-.fa-pen:hover{
+.handle-info-btn button:hover{
     background: #a73838;
     color: #fff;
     box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%),
@@ -282,6 +280,19 @@
 .footer__container span{
     font-size: 13px;
     font-weight: 600;
+}
+
+.fa-xmark:hover,
+.fa-pen:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.col-action {
+    display: flex;
+    gap: 8px;
+    border: none;
+    justify-content: center;
 }
 
 @keyframes displayModal {
