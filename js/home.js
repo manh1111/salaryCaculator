@@ -24,6 +24,9 @@ staSalary.addEventListener('click', () => {
     items.forEach((item) => {
         item.classList.remove('active')
     })
+    if (modal.classList.contains('show-modal')) {
+        handlePutStandarSalary() 
+    }
 })
 closeBtn.addEventListener('click', () => {
     modal.classList.remove('show-modal');
@@ -127,8 +130,8 @@ const exitBtn = $('.exit-btn')
 exitBtn.addEventListener('click', goToIndex)
 changePassBtn.addEventListener('click', goToConfirm)
 
-const showTeacher = () => {
-    listInput.forEach((item) => {
+const showTeacher = (id) => {
+    listInput.forEach((item, index) => {
         let input = $((`.show-info input[name="${item}"]`));
         if (input) {
             if (item === 'dob') {
@@ -137,6 +140,10 @@ const showTeacher = () => {
             else {
                 input.value = infoTeacher[`${item}`]
             }
+        }
+        const updateBtn = $('.edit-btn')
+        updateBtn.onclick = () => {
+            handleUpdateTeacher(id)
         }
     })
     let select = $('select[name="degree"]')
@@ -199,7 +206,7 @@ const showSider = (data) => {
         li.classList.add("sider-item");
         li.onclick = () => {
             infoTeacher = teacher;
-            showTeacher()
+            showTeacher(infoTeacher['_id'])
         }
         listTeacher.appendChild(li);
     }
@@ -293,6 +300,64 @@ function handleAddTeacher() {
     }
 }
 
+function handleUpdateTeacher(id) {
+    const editTeacherBtn = $('.edit-btn')
+    const inputBox = $$('.show-info input')
+    const selectBox = $('.show-info select')
+    if (editTeacherBtn) {  
+        editTeacherBtn.onclick = () => {
+            for (var i = 0; i < inputBox.length; i++) {
+                inputBox[i].removeAttribute("readonly");
+                selectBox.disabled = false
+            }
+        }
+    }
+    const updateTeacherBtn = $('.update-btn')
+    if (updateTeacherBtn) {       
+        updateTeacherBtn.onclick = () => {
+            let info = []
+            var data = {}
+            for (let item of listInput) {
+                if (item != 'teacherCode') {
+                    info[item] = $((`.show-info input[name="${item}"]`)).value
+                    let degreeTeacher = $((`.show-info select[name="degree"]`)).value
+                    data[`${item}`] = info[item]
+                    data.degree = degreeTeacher
+                }
+            }
+            data['_id'] = id
+            data['cmnd'] = Math.random().toString()
+            updateTeacher(data)
+            for (var i = 0; i < inputBox.length; i++) {
+                Object.assign(inputBox[i], { readOnly: true });
+                selectBox.disabled = true
+            }
+        }
+    }
+}
+
+const apiPutTeacher = 'https://103.69.193.30.nip.io/teachers/update'
+function updateTeacher(data) {
+    fetch(apiPutTeacher, {
+        method: "PUT",
+        //     mode: "cors", // no-cors, *cors, same-origin
+        //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        //     credentials: "include", // include, *same-origin, omit
+        headers: { 'Content-Type': 'application/json' },
+        //     redirect: "follow", // manual, *follow, error
+        //     referrerPolicy: "no-referrer",
+        body: JSON.stringify(data)
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then((response) => {}
+        )
+        .catch(e => {
+            console.log(e)
+        })
+}
+
 const apiDeleteClass = 'https://103.69.193.30.nip.io/classes/delete'
 function handleDeleteClass(id) {
     fetch(apiDeleteClass + "?id=" + id, {
@@ -327,7 +392,7 @@ function getClass() {
                 for (let i = 0; i < response.data.length; i++) {
                     let tr = document.createElement("tr");
                     let classObject = response.data[i];
-                    let data = [i + 1, classObject.name, classObject?.Subject?.name || "Đã xóa", classObject.Teacher.name,
+                    let data = [i + 1, classObject.name, classObject?.Subject?.name || "Đã xóa", classObject?.Teacher?.name,
                     classObject.studentNumber]
                     for (let j = 0; j < 6; j++) {
                         let td = document.createElement("td");
@@ -702,6 +767,7 @@ function getSalary() {
         })
 }
 
+let idStandarSalary
 const apiGetStandarSalary = 'https://103.69.193.30.nip.io/salary/getStandardSalary'
 function getStandarSalary() {
     fetch(apiGetStandarSalary)
@@ -714,8 +780,9 @@ function getStandarSalary() {
         .then((response) => {
             if (response.success) {
                 $((`.modal-body input[name="input-payroll"]`)).value = response.data.standardSalary;
-                $((`.modal-body input[name="create-payroll"]`)).value = response.data.createdAt.slice(0, 10);;
-                $((`.modal-body input[name="update-payroll"]`)).value = response.data.updatedAt.slice(0, 10);;
+                $((`.modal-body input[name="create-payroll"]`)).value = response.data.createdAt.slice(0, 10);
+                $((`.modal-body input[name="update-payroll"]`)).value = response.data.updatedAt.slice(0, 10);
+                idStandarSalary = response.data._id
             }
         })
         .catch(e => {
@@ -723,6 +790,52 @@ function getStandarSalary() {
         })
 }
 
+function handlePutStandarSalary() {
+    const editBtn = $('.payroll-modal .edit-btn')
+    const editInput = $$('.payroll-modal input')
+    if (editBtn) {  
+        editBtn.onclick = () => {
+            for (var i = 0; i < editInput.length; i++) {
+                editInput [i].removeAttribute("readonly");
+            }
+        }
+    }
+    const updateStandarSalary = $('.payroll-modal .update-btn')
+    updateStandarSalary.onclick = () => {
+        var data = {}
+        data.standardSalary = $((`.modal-body input[name="input-payroll"]`)).value 
+        data.createdAt = $((`.modal-body input[name="create-payroll"]`)).value
+        data.updatedAt = $((`.modal-body input[name="update-payroll"]`)).value
+        data['_id'] = idStandarSalary
+        putStandarSalary(data)
+        for (var i = 0; i < editInput.length; i++) {
+            Object.assign(editInput[i], { readOnly: true });
+        }
+        modal.classList.remove('show-modal')
+    }
+}
+
+const apiPutStandarSalary = 'https://103.69.193.30.nip.io/salary/updateStandardSalary'
+function putStandarSalary(data) {
+    fetch(apiPutStandarSalary, {
+        method: "PUT",
+        //     mode: "cors", // no-cors, *cors, same-origin
+        //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        //     credentials: "include", // include, *same-origin, omit
+        headers: { 'Content-Type': 'application/json' },
+        //     redirect: "follow", // manual, *follow, error
+        //     referrerPolicy: "no-referrer",
+        body: JSON.stringify(data)
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then((response) => {}
+        )
+        .catch(e => {
+            console.log(e)
+        })
+}
 
 function run() {
     getTeacher();
