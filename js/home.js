@@ -414,8 +414,28 @@ function handleAddClass() {
 
 function handleUpdateClass(id) {
     $('.modal-update-class').classList.add('show-modal');
+    optionUpdateClass();
     $('.js-close-update-class').onclick = () => {
         $('.modal-update-class').classList.remove('show-modal');   
+    }
+    const updateClassBtn = $('.update-class')
+    updateClassBtn.onclick = () => {
+        var data = {}
+        var key = ['name', 'name-subject', 'name-class', 'studentNumber']
+        var list = ['Teacher', 'name', 'Subject', 'studentNumber']
+        for (let i = 0; i < 4; i++) {
+            if (key[i] === 'name' || key[i] === 'name-subject') {
+                let classTeacher = $('.modal-update-class select[name="name"]').value
+                data.Teacher = classTeacher
+                let subjectName = $('.modal-update-class select[name="name-subject"]').value
+                data.Subject = subjectName
+            }
+            data['name'] = $(`.modal-update-class input[name="name-Class"]`).value
+            data['studentNumber'] = $(`.modal-update-class input[name="studentNumber"]`).value
+            data['_id'] = id
+        }
+        updateClass(data)
+        $('.modal-update-class').classList.remove('show-modal')
     }
 }
 
@@ -436,10 +456,50 @@ function optionCreateClass() {
     }
 }
 
+function optionUpdateClass() {
+    for (let i = 0; i < listIDTeacher.length; i++) {
+        let option = document.createElement("option")
+        option.classList.add('nameOption')
+        option.innerText = listNameTeacher[i]
+        option.value = listIDTeacher[i]
+        $('.modal-update-class .block-input:nth-child(1) select').appendChild(option)
+    }
+    for (let i = 0; i < listIDSubject.length; i++) {
+        let option = document.createElement("option")
+        option.classList.add('nameSubject-option')
+        option.innerText = listNameSubject[i]
+        option.value = listIDSubject[i]
+        $('.modal-update-class .block-input:nth-child(2) select').appendChild(option)
+    }
+}
+
 const apiPostClass = 'https://103.69.193.30.nip.io/classes/create'
 function createClass(data) {
     fetch(apiPostClass, {
         method: "POST",
+        //     mode: "cors", // no-cors, *cors, same-origin
+        //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        //     credentials: "include", // include, *same-origin, omit
+        headers: { 'Content-Type': 'application/json' },
+        //     redirect: "follow", // manual, *follow, error
+        //     referrerPolicy: "no-referrer",
+        body: JSON.stringify(data)
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(() => {
+            getClass()
+        })
+        .catch(e => {
+            console.log(e)
+        })
+}
+
+const apiUpdateClass = 'https://103.69.193.30.nip.io/classes/update'
+function updateClass(data) {
+    fetch(apiUpdateClass, {
+        method: "PUT",
         //     mode: "cors", // no-cors, *cors, same-origin
         //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
         //     credentials: "include", // include, *same-origin, omit
@@ -531,13 +591,6 @@ function getSubject() {
         })
 }
 
-function handleUpdateSubject(id) {
-    $('.modal-update-subject').classList.add('show-modal');
-    $('.js-close-update-subject').onclick = () => {
-        $('.modal-update-subject').classList.remove('show-modal');
-    }
-}
-
 function handleAddSubject() {
     const addSubjectBtn = $('.create-subject')
     addSubjectBtn.onclick = () => {
@@ -582,6 +635,53 @@ function createSubject(data) {
         })
 }
 
+
+function handleUpdateSubject(id) {
+    $('.modal-update-subject').classList.add('show-modal');
+    $('.js-close-update-subject').onclick = () => {
+        $('.modal-update-subject').classList.remove('show-modal');
+    }
+    const updateSubjectBtn = $('.update-subject')
+    updateSubjectBtn.onclick = () => {
+        var data = {}
+        var key = ['name', 'subject-code', 'sub-coefficients', 'lession']
+        var list = ['name', 'subjectCode', 'subjectCoefficients', 'lession']
+        for (let i = 0; i < 4; i++) {
+            if (key[i] == 'sub-coefficients') {
+                data[`${list[i]}`] =  $((`.modal-update-subject select[name="sub-coefficients"]`)).value 
+            }
+            else {
+                data[`${list[i]}`] = $((`.modal-update-subject input[name="${key[i]}"]`)).value
+            }
+        }
+        data["_id"] = id
+        updateSubject(data)
+        $('.modal-update-subject').classList.remove('show-modal')
+    }
+}
+
+const apiUpdateSubject = 'https://103.69.193.30.nip.io/subject/update'
+function updateSubject(data) {
+    fetch(apiUpdateSubject, {
+        method: "PUT",
+        //     mode: "cors", // no-cors, *cors, same-origin
+        //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        //     credentials: "include", // include, *same-origin, omit
+        headers: { 'Content-Type': 'application/json' },
+        //     redirect: "follow", // manual, *follow, error
+        //     referrerPolicy: "no-referrer",
+        body: JSON.stringify(data)
+    })
+        .then(function (response) {
+            response.json();
+        })
+        .then(() => {
+            getSubject()
+        })
+        .catch(e => {
+            console.log(e)
+        })
+}
 
 const apiGetSalary = 'https://103.69.193.30.nip.io/salary/get'
 function getSalary() {
