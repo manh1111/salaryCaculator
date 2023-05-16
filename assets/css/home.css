@@ -65,6 +65,18 @@
     width: 100px;
 }
 
+.confirmation-box-buttons button,
+.confirmation-sub-buttons button {
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #eecfcf;
+    width: 60px;
+    border: 1px solid #ccc;
+    margin: 10 50px;
+}
+
 .fa-xmark,
 .fa-pen{
     padding: 5px
@@ -198,6 +210,7 @@
 .modal-update-subject,
 .modal-update-class,
 .modal-create-subject{
+    animation: displayModal ease 0.4s;
     position: fixed;
     display: none;
     width: 100%;
@@ -299,6 +312,41 @@
     gap: 8px;
     border: none;
     justify-content: center;
+}
+
+
+.confirmation-box,
+.confirmation-sub{
+    display: none;
+    /* position: absolute; */
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 295px;
+    height: 70px;
+    padding: 5px;
+    font: 1em sans-serif;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.confirmation-box.show,
+.confirmation-sub.show {
+    display: block;
+    text-align: center;
+}
+
+
+.confirmation-box-buttons,
+.confirmation-sub-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 15px;
 }
 
 @keyframes displayModal {

@@ -335,7 +335,7 @@ function getClass() {
                         if (j === 5) {
                             let iElement = document.createElement('i')
                             iElement.classList.add('fa-solid', 'fa-xmark')
-                            iElement.onclick = () => { handleDeleteClass(listIDClass[i]) }
+                            iElement.onclick = () => { showConfirmation(listIDClass[i]) }
                             td.appendChild(iElement)
                             let i2Element = document.createElement('i')
                             i2Element.classList.add('fa-solid', 'fa-pen')
@@ -357,6 +357,39 @@ function getClass() {
             console.log(e)
         })
 }
+
+function showConfirmation(id) {
+    document.getElementById("confirmationBox").classList.add("show");
+    let deleteClassBtn = $('.deleteClass')
+    deleteClassBtn.onclick = () => {
+        handleDeleteClass(id)
+        if ($("#confirmationBox")) {
+            $("#confirmationBox").classList.remove("show");
+        }
+    }
+}
+
+function showConfirmationSub(id) {
+    document.getElementById("confirmationSub").classList.add("show");
+    let deleteSubBtn = $('.deleteSub')
+    deleteSubBtn.onclick = () => {
+        handleDeleteSubject(id)
+        if ($("#confirmationSub")) {
+            $("#confirmationSub").classList.remove("show");       
+        }
+    }
+}
+
+
+function hideConfirmation() {
+    if ($("#confirmationBox")) {
+        $("#confirmationBox").classList.remove("show");
+    }
+    if ($("#confirmationSub")) {
+        $("#confirmationSub").classList.remove("show");       
+    }
+}
+
 
 function handleAddClass() {
     const addClassBtn = $('.create-class')
@@ -474,12 +507,12 @@ function getSubject() {
                             let iElement = document.createElement('i')
                             iElement.classList.add('fa-solid')
                             iElement.classList.add('fa-xmark')
-                            iElement.onclick = () => { handleDeleteSubject(listIDSubject[i]) }
+                            iElement.onclick = () => { showConfirmationSub(listIDSubject[i]) }
                             td.appendChild(iElement)
                             let i2Element = document.createElement('i')
                             i2Element.classList.add('fa-solid')
                             i2Element.classList.add('fa-pen')
-                            i2Element.onclick = ()=>{ handleUpdateSubject(listIDClass[i])}
+                            i2Element.onclick = ()=>{ handleUpdateSubject(listIDSubject[i])}
                             td.appendChild(i2Element)
                             td.classList.add('col-action')
                         }
